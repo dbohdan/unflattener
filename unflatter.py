@@ -1,66 +1,94 @@
 #!/usr/bin/env python
+# Copyright (C) 2013 Danyil Bohdan
+# All rights Reserved.
 import Image
 import numpy
 import time
 
-t = time.time()
+
+class SpriteNormalMap(object):
+    def __init__(self):
+        pass
+    
+    def create(self, image_file_names, depth=numpy.float64(1) / 2):
+        """
+        image_file_names is a dict that should contain the keys
+        'left', 'right', 'top' and 'bottom'.
+        """
+        self.images = {}
+        self.depth = depth
+        self.imgshape = None
+        for imagefile in image_file_names:
+            im = Image.open(image_file_names[imagefile])
+            self.images[imagefile] = convert(im)
+            # Check if all images are the same size
+            if not self.imgshape:
+                self.imgshape = self.images[imagefile].shape
+            else:
+                if self.imgshape != self.images[imagefile].shape:
+                    raise EValueError
+                    
+        self.a = numpy.zeros((3, self.imgshape[0], self.imgshape[1]), dtype='float64')
+        
+        self.a[0] = self.images['right'] - self.images['left'] # x_N
+        self.a[1] = self.images['top'] - self.images['bottom'] # y_N
+        self.a[2] = 1.0
+
+        norm = self.a[0] * self.a[0] + self.a[1] * self.a[1]
+        it = numpy.nditer(self.a[2], flags=['multi_index'])
+        while not it.finished:
+            #print it, it.multi_index, it[0]
+            n = norm[it.multi_index]
+            #print it.multi_index, n
+            if n > 0:
+                self.a[2][it.multi_index] = numpy.sqrt(max(1 - n / numpy.sqrt(n), 0))
+            it.iternext()
+    
+    def save_image(self, filename):
+        aim = self.a.copy()
+        aim[0] = (aim[0] + 1) / 2
+        aim[1] = (aim[1] + 1) / 2
+        # Compress z_N range.
+        aim[2] = aim[2] * self.depth + (1 - self.depth)
+
+        # Convert 0.0..1.0 to 0..255 bytes.
+        aim *= 255
+        aim = aim.astype('uint8')
+
+        # Create a new image from aim
+        normal_map = Image.new('RGB', self.imgshape)
+        for i in range(aim.shape[1]):
+            for j in range(aim.shape[2]):
+                #print aim[:, i, j]
+                normal_map.putpixel((i, j), tuple(aim[:, i, j]))
+        normal_map.save(filename)
+        
+    def load_image(self, filename):
+        pass
+        
+    def light(self, image, light_vector):
+        pass
 
 def convert(im):
     d = im.convert('L').getdata()
     return numpy.array(d, dtype='float64').reshape(im.size, order='F') / 255
 
-fn = "zombie"
-image_types = "left", "right", "top", "bottom"
-images = {}
 
-imgshape = None
-for imagefile in image_types:
-    im = Image.open("%s-%s.png" % (fn, imagefile))
-    images[imagefile] = convert(im)
-    # Check if all images are the same size
-    if not imgshape:
-        imgshape = images[imagefile].shape
-    else:
-        if imgshape != images[imagefile].shape:
-            raise EValueError
+def main():
+    t = time.time()
 
-a = numpy.zeros((3, imgshape[0], imgshape[1]), dtype='float64')
-#print(images['top'].shape, a.shape)
+    im_files= {'left': "zombie-left.png",
+               'right': "zombie-right.png",
+               'top': "zombie-top.png",
+               'bottom': "zombie-bottom.png"}
+    
+    sn = SpriteNormalMap()
+    sn.create(im_files, depth=0.5)
+    sn.save_image('result.png')
+    
 
-a[0] = images['right'] - images['left'] # x_N
-a[1] = images['top'] - images['bottom'] # y_N
-a[2] = 1.0
+    t = time.time() - t
+    print("Execution time: %0.3f s" % t)
 
-norm = a[0] * a[0] + a[1] * a[1]
-it = numpy.nditer(a[2], flags=['multi_index'])
-while not it.finished:
-    #print it, it.multi_index, it[0]
-    n = norm[it.multi_index]
-    #print it.multi_index, n
-    if n > 0:
-        a[2][it.multi_index] = numpy.sqrt(max(1 - n / numpy.sqrt(n), 0))
-    it.iternext()
-                          
-for i in range(3):
-    print a[i].min(), a[i].max()
-print a[:, 0, 0]
-
-aim = a.copy()
-aim[0] = (a[0] + 1) / 2
-aim[1] = (a[1] + 1) / 2
-aim *= 255
-aim = aim.astype('uint8')
-print aim[:, 0, 0]
-
-for i in range(3):
-    print aim[i].min(), aim[i].max()
-
-normal_map = Image.new('RGB', imgshape)
-for i in range(a.shape[1]):
-    for j in range(a.shape[2]):
-        #print aim[:, i, j]
-        normal_map.putpixel((i, j), tuple(aim[:, i, j]))
-normal_map.save('result.png')
-
-t = time.time() - t
-print("Execution time: %0.3f s" % t)
+if __name__ == '__main__':
+    main()
