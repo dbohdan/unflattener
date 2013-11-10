@@ -26,6 +26,7 @@ class SpriteNormalMap(object):
                 self.imgshape = self.images[imagefile].shape
             else:
                 if self.imgshape != self.images[imagefile].shape:
+                    print image_file_names[imagefile], self.images, self.imgshape, self.images[imagefile].shape
                     raise EValueError
                     
         self.a = numpy.zeros((3, self.imgshape[0], self.imgshape[1]), dtype='float64')
@@ -51,16 +52,7 @@ class SpriteNormalMap(object):
         # Compress z_N range.
         aim[2] = aim[2] * self.depth + (1 - self.depth)
 
-        # Convert 0.0..1.0 to 0..255 bytes.
-        aim *= 255
-        aim = aim.astype('uint8')
-
-        # Create a new image from aim
-        normal_map = Image.new('RGB', self.imgshape)
-        for i in range(aim.shape[1]):
-            for j in range(aim.shape[2]):
-                #print aim[:, i, j]
-                normal_map.putpixel((i, j), tuple(aim[:, i, j]))
+        normal_map = back(aim)
         normal_map.save(filename)
         
     def load_image(self, filename):
@@ -71,8 +63,14 @@ class SpriteNormalMap(object):
 
 def convert(im):
     d = im.convert('L').getdata()
-    return numpy.array(d, dtype='float64').reshape(im.size, order='F') / 255
+    return numpy.array(d, dtype='float64').reshape(im.size[::-1]) / 255
+    
+def back(arr):
+    ni = range(3)
+    for i in ni:
+        ni[i] = Image.fromarray((arr[i] * 255).astype('uint8'))
 
+    return Image.merge('RGB', ni)
 
 def main():
     t = time.time()
