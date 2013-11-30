@@ -1,7 +1,16 @@
-# unflatterer, a normal map generator for 2D art.
+# unflattener, a normal map generator for 2D art.
 # Copyright (C) 2013 Danyil Bohdan
 # All rights Reserved.
 # See the file LICENSE for licensing information.
+"""
+Implements the NormalMap class.
+"""
+
+from __future__ import print_function
+
+__author__ = 'Danyil Bohdan'
+__copyright__ = 'Copyright (C) 2013 Danyil Bohdan'
+__license__ = 'BSD'
 
 import Image
 import numpy

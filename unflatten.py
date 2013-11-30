@@ -1,30 +1,35 @@
 #!/usr/bin/env python
-# unflatterer, a normal map generator for 2D art.
+# unflattener, a normal map generator for 2D art.
 # Copyright (C) 2013 Danyil Bohdan
 # All rights Reserved.
 # See the file LICENSE for licensing information.
+"""
+Provides a command line interface for the NormalMap class.
+"""
+
+from __future__ import print_function
 
 import time
 import argparse
 import numpy
 import normalmapgen
 
-descr = """
+DESCRIPTION = """
 Generate a normal map for 2D art
 """
 
-epi = """
+EPILOG = """
 One input file minimum, at least two (one for each axis) highly recommended.
 Input files should be 8-bit grayscale PNGs.
 """
 
 def main():
-    t = time.time()
+    run_time = time.time()
 
     input_file_types = ['top', 'bottom', 'left', 'right']
 
     # Parse command line arguments.
-    parser = argparse.ArgumentParser(description=descr, epilog=epi)
+    parser = argparse.ArgumentParser(description=DESCRIPTION, epilog=EPILOG)
     for argname in input_file_types:
         parser.add_argument('--' + argname, '-' + argname[0],
                             default=None, help="%s image file" % argname)
@@ -42,14 +47,15 @@ def main():
         exit(1)
 
     # Process input files and create a normal map.
-    sn = normalmapgen.NormalMap()
+    normal_map = normalmapgen.NormalMap()
 
-    sn.create_from_files(input_file_names)
-    sn.save_image(argsdict['output'], depth=numpy.float64(argsdict['depth']))
+    normal_map.create_from_files(input_file_names)
+    normal_map.save_image(argsdict['output'],
+                          depth=numpy.float64(argsdict['depth']))
 
     # Measure the time all of the above took.
-    t = time.time() - t
-    print("Execution time: %0.3f s" % t)
+    run_time = time.time() - run_time
+    print("Execution time: %0.3f s" % run_time)
 
 if __name__ == '__main__':
     main()

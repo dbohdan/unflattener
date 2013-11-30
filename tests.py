@@ -1,40 +1,59 @@
 #!/usr/bin/env python
-# unflatterer, a normal map generator for 2D art.
+# unflattener, a normal map generator for 2D art.
 # Copyright (C) 2013 Danyil Bohdan
 # All rights Reserved.
 # See the file LICENSE for licensing information.
+"""
+Implements simple sanity checks for NormalMap and functions from normalmapgen.
+"""
+
+from __future__ import print_function
 
 import Image
 import os
 from normalmapgen import NormalMap
 from normalmapgen import image_to_array, array_to_image, arrays_equivalent
 
-im_files = {'left': "zombie-left.png",
-           'right': "zombie-right.png",
-           'top': "zombie-top.png",
-           'bottom': "zombie-bottom.png"}
+TESTFILENAMES = {'left': "zombie-left.png",
+                 'right': "zombie-right.png",
+                 'top': "zombie-top.png",
+                 'bottom': "zombie-bottom.png"}
 
-test_dir = "test-images"
+TESTDIR = "test-images"
 
 # Append directory prefix to test art file names.
-im_files = {k: os.path.join(test_dir, im_files[k]) for k in im_files}
+TESTIMAGEFILES = {k: os.path.join(TESTDIR, TESTFILENAMES[k]) \
+                  for k in TESTFILENAMES}
 
-for i in range(8):
-    depth = 1.0 / 2**i
-    print("Running normal map generation test with depth %0.4f (1 / 2^%i)" %
-          (depth, i))
-    sn1 = NormalMap()
-    sn1.create_from_files(im_files)
-    sn1.save_image('result1.png', depth)
-    sn2 = NormalMap()
-    sn2.load_image('result1.png', depth)
-    sn2.save_image('result2.png', depth)
-    assert(sn1.compare(sn2, depth))
-    assert(sn2.compare(sn1, depth))
+def map_gen_test():
+    """Test generating normal maps of varying depths from image files"""
 
-print("Testing image to array to image conversion.")
-im = Image.open(im_files['left'])
-arr_there = image_to_array(im)
-arr_back_again = image_to_array(array_to_image(arr_there))
-assert(arrays_equivalent(arr_there, arr_back_again))
+    for i in range(8):
+        depth = 1.0 / 2**i
+        print("Running normal map generation test with depth %0.4f (1 / 2^%i)" %
+              (depth, i))
+        nm1 = NormalMap()
+        nm1.create_from_files(TESTIMAGEFILES)
+        nm1.save_image('result1.png', depth)
+        # nm1.save_image("result-%u.png" % i, depth)
+        nm2 = NormalMap()
+        nm2.load_image('result1.png', depth)
+        nm2.save_image('result2.png', depth)
+        assert(nm1.compare(nm2, depth))
+        assert(nm2.compare(nm1, depth))
 
+def image_comp_test():
+    """Test `image_to_array` and `array_to_image` functions."""
+
+    print("Testing image to array to image conversion.")
+    im = Image.open(TESTIMAGEFILES['left'])
+    arr_there = image_to_array(im)
+    arr_back_again = image_to_array(array_to_image(arr_there))
+    assert(arrays_equivalent(arr_there, arr_back_again))
+
+def main():
+    map_gen_test()
+    image_comp_test()
+
+if __name__ == "__main__":
+    main()
