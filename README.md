@@ -1,21 +1,21 @@
 unflattener
 ===========
 
-Unflattener is a Python module and a command line tool (`unflatten.py`) that generates normal maps for 2D graphics. You can use the generated normal maps to, e.g., make dynamically lit sprites for a video game. Unflattener takes as its input images of your object lit by a light source pointing directly at it from from four directions: top, bottom, left and right (the images are called "directionally lit" or "d-lit" — like "d-pad"). This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
+Unflattener is a Python module and a command line tool (`unflatten.py`) that generates normal maps for 2D graphics. You can use the generated normal maps to, e.g., make dynamically lit sprites in a video game. Unflattener takes as its input images of your object lit by a light source pointing directly at it from from four directions: top, bottom, left and right (the images are called "directionally lit" or "d-lit" — like "d-pad"). This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
 
-Unflattener is written in Python and requires the libraries NumPy and PIL to run. Right now it cannot do lighting previews, so you'll need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that. Python programs can access Unflattener's functionality directly by importing the `NormalMap` class from the module `normalmapgen`.
+Unflattener is written in Python and requires the libraries NumPy and PIL to run. Right now it cannot do dynamic lighting previews, so you'll need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that. Python programs can access Unflattener's functionality directly by importing the `NormalMap` class from the module `normalmapgen`.
 
 Example
 =======
 
 ![D-lit images and the resulting normal map](readme-illustrations/illustration1.png)
 
-![Together diffuse and normal maps enable dynamic lighting](readme-illustrations/illustration2.png)
+![Together the diffuse and normal maps make it possible to create use dynamic lighting](readme-illustrations/illustration2.png)
 
 How it works
 ============
 
-The core algorithm is explained in a (rather lengthy) comment in  the method `NormalMap.create_from_images` in `normalmapgen.py`. You'll find some tips on how the input artwork should look in the same comment.
+The core algorithm is explained in a (rather lengthy) comment in the method `NormalMap.create_from_images` in `normalmapgen.py`. You'll find some tips on how the input artwork should look in the same comment.
 
 Installation
 ============
@@ -40,7 +40,7 @@ Only 32-bit versions of Python and its libraries have been tested on Windows (bo
 
 Clone this repository and run `run.sh` on Linux or `run-win.cmd` on Windows. To generate normal maps for other images edit those files to suit your needs or directly run `unflatten.py`.
 
-Run `tests.py` to verify that everything works correctly. (The tests may currently fail on Windows 7 and 8.x.)
+Run `tests.py` to verify that everything works correctly.
 
 To install gimp-normalmap on Debian and Ubuntu do
 
@@ -78,9 +78,9 @@ Usage
 Art requested
 =============
 
-Wanted: d-lit images for use in testing and to illustrate this very README on GitHub. I'd love to see Unflattener works for your art.
+Wanted: d-lit images for use in testing and to illustrate this very README on GitHub. I'd love to see how Unflattener works for your artwork or game.
 
-Put your art online and [file an issue](https://github.com/dbohdan/unflattener/issues) to have it added.
+[File an issue](https://github.com/dbohdan/unflattener/issues) to have a link to your project added here.
 
 Licensing information
 =====================
