@@ -12,6 +12,8 @@ Example
 
 ![Together the diffuse and normal maps make it possible to create use dynamic lighting](readme-illustrations/illustration2.png)
 
+![Dynamic lighting in gimp-normalmap in motion](readme-illustrations/animation1.gif)
+
 How it works
 ============
 
