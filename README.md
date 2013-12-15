@@ -1,9 +1,16 @@
 unflattener
 ===========
 
-Unflattener is a Python module and a command line tool (`unflatten.py`) that generates normal maps for 2D graphics. You can use the generated normal maps to, e.g., make dynamically lit sprites for a video game. Unflattener takes as its input images of your object lit by a light source pointing directly at it from from four directions: top, bottom, left and right. (We'll call those images "directionally lit" or "d-lit" — like "d-pad"). This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
+Unflattener is a Python module and a command line tool (`unflatten.py`) that generates normal maps for 2D graphics. You can use the generated normal maps to, e.g., make dynamically lit sprites for a video game. Unflattener takes as its input images of your object lit by a light source pointing directly at it from from four directions: top, bottom, left and right (the images are called "directionally lit" or "d-lit" — like "d-pad"). This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
 
-Unflattener is written in Python and requires the libraries NumPy and PIL to run. Right now it cannot do lighting previews, so you'll need a third-party tool like [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) for that. Python programs can access Unflattener's functionality directly by importing the `NormalMap` class from the module `normalmapgen`.
+Unflattener is written in Python and requires the libraries NumPy and PIL to run. Right now it cannot do lighting previews, so you'll need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that. Python programs can access Unflattener's functionality directly by importing the `NormalMap` class from the module `normalmapgen`.
+
+Example
+=======
+
+![D-lit images and the resulting normal map](readme-illustrations/illustration1.png)
+
+![Together diffuse and normal maps enable dynamic lighting](readme-illustrations/illustration2.png)
 
 How it works
 ============
@@ -15,7 +22,7 @@ Installation
 
 Unflattener has been tested to work under Linux (Ubuntu 12.04, Fedora 19 and Debian 7) and Windows (XP, 7 and 8.1).
 
-You'll need Python 2.7 (v2.6 and earlier won't work due to the use of dict comprehensions), NumPy and either PIL (the Python Imaging Library) or its substitute Pillow to run Unflattener. On Debian and Ubuntu you can do this with
+You'll need Python 2.7 (v2.6 and earlier won't work due to the use of dict comprehensions), NumPy and either PIL (the Python Imaging Library) or its substitute Pillow to run Unflattener. On Debian and Ubuntu you can install the required packages with
 
     sudo apt-get install python-numpy python-imaging
 
@@ -33,8 +40,16 @@ Only 32-bit versions of Python and its libraries have been tested on Windows (bo
 
 Clone this repository and run `run.sh` on Linux or `run-win.cmd` on Windows. To generate normal maps for other images edit those files to suit your needs or directly run `unflatten.py`.
 
-Run `tests.py` to verify that everything works correctly. (The tests may currently fail on Windows 7 and 8.)
+Run `tests.py` to verify that everything works correctly. (The tests may currently fail on Windows 7 and 8.x.)
 
+To install gimp-normalmap on Debian and Ubuntu do
+
+	sudo apt-get install gimp-normalmap
+
+On Fedora:
+
+    su -
+    yum install gimp-normalmap
 
 Usage
 =====
@@ -63,13 +78,13 @@ Usage
 Art requested
 =============
 
-Wanted: d-lit images for use in testing and to illustrate this very README on GitHub. Show us how Unflattener works for your art.
+Wanted: d-lit images for use in testing and to illustrate this very README on GitHub. I'd love to see Unflattener works for your art.
 
-Put your art online and file an issue on the project page to have it added.
+Put your art online and [file an issue](https://github.com/dbohdan/unflattener/issues) to have it added.
 
 Licensing information
 =====================
 
 Unflattener is distributed under the new (3-clause) BSD license. See the file `LICENSE`.
 
-Robot sprite originally from the [Bits & Bots art pack](http://opengameart.org/content/bits-bots-art-pack) by MoikMellah. It and its derivatives are licensed under the Creative Commons CC-BY-SA 3.0 license.
+Robot sprite originally from the [Bits & Bots art pack](http://opengameart.org/content/bits-bots-art-pack) by MoikMellah. The sprite and its derivatives are licensed under the Creative Commons CC-BY-SA 3.0 license.
