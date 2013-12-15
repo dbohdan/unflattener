@@ -9,15 +9,16 @@ Implements simple sanity checks for NormalMap and functions from normalmapgen.
 
 from __future__ import print_function
 
-import Image
+from PIL import Image
 import os
 from normalmapgen import NormalMap
 from normalmapgen import image_to_array, array_to_image, arrays_equivalent
 
-TESTFILENAMES = {'left': "zombie-left.png",
-                 'right': "zombie-right.png",
-                 'top': "zombie-top.png",
-                 'bottom': "zombie-bottom.png"}
+TESTFILENAMES = {'left': "robot-left.png",
+                 'right': "robot-right.png",
+                 'top': "robot-top.png",
+                 'bottom': "robot-bottom.png"
+                }
 
 TESTDIR = "test-images"
 

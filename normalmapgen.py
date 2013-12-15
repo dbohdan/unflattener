@@ -12,7 +12,7 @@ __author__ = 'Danyil Bohdan'
 __copyright__ = 'Copyright (C) 2013 Danyil Bohdan'
 __license__ = 'BSD'
 
-import Image
+from PIL import Image
 import numpy
 
 POINTFIVE = numpy.float64(1) / 2
@@ -65,9 +65,104 @@ class NormalMap(object):
         # Check if all images are the same size, raise exception otherwise
         self.image_shape = image_shape(self.images.values())
 
+        # (What follows is an explanation of how the algorithm works.
+        # The explanation is a work in progress.)
+        #
+        # For our purposes 2D artwork (sprites, textures, etc.) represents
+        # a projection of a 3D object on a flat surface. We can think of that
+        # object itself as a surface with varying height with no overhanging
+        # parts (imagine a wall relief sculpture or furniture covered with
+        # a piece of cloth).
+        #
+        # Our goal here is to obtain per-pixel tangent-space
+        # normal map data or, in other words, a map of where the normal vectors
+        # point relative to the surface of the object. To do this we will use
+        # grayscale images showing what our relief-type object would look like
+        # when lit by a light source pointed directly at it from four
+        # directions (top, bottom, left and right) if this object were
+        # uniformly white in color with no self-shadowing.
+        # (We call these images "directionally lit" or "d-lit" -- like
+        # "d-pad"). There should also be no highlights -- as though
+        # the light source were very large relative to the object and placed
+        # very far away. We can use fewer
+        # images than four to generate normal maps but for complex objects
+        # (complex artwork) that might not yield good results.
+        #
+        # The motivation behind this method is that our
+        # human brains seem to find it easier to produce such images for
+        # imagined objects than to draw normal maps directly.
+        #
+        # The reason we can obtain a normal map from d-lit images is because of
+        # the role normal maps play in calculating lighting. To determine how
+        # brightly lit a given pixel is (to find its illumination value "I")
+        # when calculating lighting we go through the image
+        # and for each pixel of our graphic we calculate the scalar product
+        # of its normal vector (x_N, y_N, z_N) and the vector (x_L, y_L, z_L)
+        # pointing towards our light source.
+        #
+        # Each coordinate of both vectors is in range -1..1.
+        # Below "dot" denotes the dot product of two vectors.
+        #
+        #     I_pr = N dot L = x_N * x_L + y_N * y_L + z_N * z_L
+        #     I = max(min(I_pr, 1), 0)
+        #
+        # Now if we craft special images where each pixel is a product
+        # of the normal vector and a pre-set lighting vector we can use them
+        # to obtain normal data. This is what d-lit images are.
+        #
+        # Image     Vector
+        # ---------------------------------
+        # Right     L_right  =  ( 1,  0, 0)
+        # Left      L_left   =  (-1,  0, 0)
+        # Top       L_top    =  ( 0,  1, 0)
+        # Bottom    L_bottom =  ( 0, -1, 0)
+        #
+        # For example, N dot L_right equals x_N for x_N: 0 < x_N <= 1 (but
+        # _not_ x_N: -1 <= x_N < 0).
+        #
+        #     N dot L_right = max(min(x_N, 1), 0)
+        #
+        # N dot L_left equals x_N for x_N: -1 <= x_N < 0 (x_N for x_N: 0 < x_N
+        # <= 1).
+        #
+        #     N dot L_left = max(min(-x_N, 1), 0)
+        #
+        # Hence,
+        #
+        #     x_N = (N dot L_right) - (N dot L_left)
+        #
+        # and, similarly,
+        #
+        #       y_N = (N dot L_top) - (N dot L_bottom).
+        #
+        # How z_N is obtained is described in a comment further below.
+        #
+        # Note: this explanation uses a coordinate system as pictured.
+        # z_N points towards the reader.
+        #
+        #     ^ y
+        #     |
+        #     +---------------------------+
+        #     | image                     |
+        #     |             y_N           |
+        #     |                           |
+        #     |             ^             |
+        #     |             |             |
+        #     |             |             |
+        #     |             o---> x_N     |
+        #     |            /              |
+        #     |          |/               |
+        #     |          +--              |
+        #     |      z_N                  |
+        #     |                           |
+        #     |                           |
+        #     +---------------------------+---> x
+
+
         # Create an array for normal map data. The dimenstions are
         # [color_channel, x, y], where [0, x, y] stands for the red channel,
         # [1, x, y] for green and [2, x, y] for blue.
+
         self.normal_data = numpy.zeros((3, self.image_shape[0],
                                             self.image_shape[1]),
                                        dtype='float64')
@@ -90,8 +185,9 @@ class NormalMap(object):
         while not it.finished:
             n = xy_vector_norms_sq[it.multi_index]
             if n > 0:
-                # Assume N = (x_N, y_N, z_N) to be a unit vector, i.e., N dot N = 1
-                # Hence z_N^2 = 1 - x_N^2 - y_N^2. Otherwise if
+                # Assume N = (x_N, y_N, z_N) to be a unit vector, i.e.,
+                # N dot N = 1
+                # Hence, z_N^2 = 1 - x_N^2 - y_N^2. Otherwise if
                 # x_N^2 + y_N^2 >= 0 then z_N = 0.
                 self.normal_data[2][it.multi_index] = \
                                      numpy.sqrt(max(1 - n / numpy.sqrt(n), 0))
