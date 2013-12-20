@@ -212,6 +212,7 @@ class NormalMap(object):
         The `depth` setting is explained in `save_image`.
         """
         im = Image.open(filename)
+        im.load()
         r, g, b  = im.split()[:3] # Throw away the alpha channel, if any.
         # image_shape is array shape transposed.
         self.image_shape = r.size[::-1]
