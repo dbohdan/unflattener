@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # unflattener, a normal map generator for 2D art.
-# Copyright (C) 2013 Danyil Bohdan
+# Copyright (C) 2013, 2014 Danyil Bohdan
 # All rights Reserved.
 # See the file LICENSE for licensing information.
 """
@@ -12,7 +12,7 @@ from __future__ import print_function
 import time
 import argparse
 import numpy
-import normalmapgen
+from unflattener import normalmapgen
 
 DESCRIPTION = """
 Generate a normal map for 2D art
@@ -35,7 +35,7 @@ def main():
                             default=None, help="%s image file" % argname)
     parser.add_argument('--output', '-o', default='result.png',
                         help='output file name')
-    parser.add_argument('--depth', '-d', default=normalmapgen.POINTFIVE,
+    parser.add_argument('--depth', '-d', default=normalmapgen.POINT_FIVE,
                         help='normal map z_N range')
     args = parser.parse_args()
     argsdict = vars(args)

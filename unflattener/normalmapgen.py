@@ -1,5 +1,5 @@
 # unflattener, a normal map generator for 2D art.
-# Copyright (C) 2013 Danyil Bohdan
+# Copyright (C) 2013, 2014 Danyil Bohdan
 # All rights Reserved.
 # See the file LICENSE for licensing information.
 """
@@ -8,14 +8,11 @@ Implements the NormalMap class.
 
 from __future__ import print_function
 
-__author__ = 'Danyil Bohdan'
-__copyright__ = 'Copyright (C) 2013 Danyil Bohdan'
-__license__ = 'BSD'
-
 from PIL import Image
 import numpy
 
-POINTFIVE = numpy.float64(1) / 2
+POINT_FIVE = numpy.float64(1) / 2
+
 
 class NormalMap(object):
     """Generates, stores and saves/loads normal maps for 2D, d-lit* art.
@@ -28,8 +25,8 @@ class NormalMap(object):
         self.images = None
         self.image_shape = None
 
-    def create_from_files(self, image_file_names, hor_base_level=POINTFIVE,
-                                                  vert_base_level=POINTFIVE):
+    def create_from_files(self, image_file_names, hor_base_level=POINT_FIVE,
+                                                  vert_base_level=POINT_FIVE):
         """
         Generate a normal map from two or more image files.
 
@@ -47,8 +44,8 @@ class NormalMap(object):
                 images[image_file] = im
         self.create_from_images(images, hor_base_level, vert_base_level)
 
-    def create_from_images(self, images, hor_base_level=POINTFIVE,
-                                         vert_base_level=POINTFIVE):
+    def create_from_images(self, images, hor_base_level=POINT_FIVE,
+                                         vert_base_level=POINT_FIVE):
         """
         Generate a normal map based on one or more images.
 
@@ -193,7 +190,7 @@ class NormalMap(object):
                                      numpy.sqrt(max(1 - n / numpy.sqrt(n), 0))
             it.iternext()
 
-    def save_image(self, filename, depth=POINTFIVE):
+    def save_image(self, filename, depth=POINT_FIVE):
         """Save the normal map to the image file `filename`."""
         preproc_data = self.normal_data.copy()
         # Transform x_N, y_N from the -1.0..1.0 range to 0.0..1.0.
@@ -206,7 +203,7 @@ class NormalMap(object):
         normal_map = array_to_image(preproc_data)
         normal_map.save(filename)
 
-    def load_image(self, filename, depth=POINTFIVE):
+    def load_image(self, filename, depth=POINT_FIVE):
         """Load the normal map from the image file `filename`.
 
         The `depth` setting is explained in `save_image`.
@@ -235,7 +232,7 @@ class NormalMap(object):
         """Not implemented."""
         raise NotImplementedError
 
-    def compare(self, other, depth=POINTFIVE):
+    def compare(self, other, depth=POINT_FIVE):
         """Compares normal map data with arrays_equivalent.
 
         Returns True for equivalent maps."""
@@ -274,7 +271,8 @@ def array_to_image(arr, alpha=None):
         raise ValueError
     return res
 
-def arrays_equivalent(arr1, arr2, depth=POINTFIVE):
+
+def arrays_equivalent(arr1, arr2, depth=POINT_FIVE):
     """Compares normal map data array. Returns True for equivalent data.
 
     "Equivalent" here doesn't mean "equal". The comparison accounts for the
@@ -283,6 +281,7 @@ def arrays_equivalent(arr1, arr2, depth=POINTFIVE):
     """
     max_diff = (numpy.abs(arr1 - arr2)).max() * 255
     return max_diff < max(1 / depth, 2.01)
+
 
 def image_shape(images):
     """Check if all image in `images` have same shape and return that shape."""

@@ -1,3 +1,7 @@
 *.pyc
+unflattener/*.pyc
 result*.png
 diff*.png
+/dist/
+/build/
+/*.egg-info
