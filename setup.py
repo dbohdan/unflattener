@@ -4,7 +4,7 @@ execfile('unflattener/__init__.py')
 
 setup(
     name='Unflattener',
-    version='1.0',
+    version=__version__,
     description='Make normal maps for 2D art.',
     url='http://github.com/dbohdan/unflattener',
     author='Danyil Bohdan',

@@ -35,7 +35,7 @@ Unflattener has been tested to work under Linux (Ubuntu 12.04, Fedora 19 and Deb
 
 You'll need Python 2.7 (v2.6 and earlier won't work due to the use of dict comprehensions), NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener.
 
-Once you've installed the dependencies (see below) clone this repository. You can run Unflattener on the test images without installing it with `run.sh` on Linux or `run-win.cmd` on Windows. To generate normal maps for other images you can either edit those files as needed, directly run `unflattener/unflatten.py` or use Setuptools to install the Unflattener package and get the command `unflatten` (on Linux / OS X).
+Once you've installed the dependencies (see below) clone this repository. You can run Unflattener on the test images without installing it with `run.sh` on Linux or `run-win.cmd` on Windows. To generate normal maps for other images you can either edit those files as needed, directly run `unflattener/unflatten.py` or use Setuptools to install the Unflattener package and get the command `unflatten`.
 
 Run the command `sudo python setup.py test` or run the test suite (`unflattener/tests/__init__.py`) directly to verify that everything works correctly.
 
