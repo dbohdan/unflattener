@@ -78,8 +78,8 @@ Windows
 
 On Windows first install Python 2.7 using the official installer from <http://python.org/download/>. After that is done download and run the following package installers from <http://www.lfd.uci.edu/~gohlke/pythonlibs/>:
 
-* numpy-MKL-1.8.0.win32-py2.7.exe
-* Pillow-2.2.1.win32-py2.7.exe
+* `numpy-MKL-<version number>.win32-py2.7.exe`
+* `Pillow-<version number>.win32-py2.7.exe`
 
 Only 32-bit versions of Python and its libraries have been tested on Windows (both 32-bit and 64-bit versions), so it is recommended that you use them.
 
