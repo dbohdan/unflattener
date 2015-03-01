@@ -2,7 +2,7 @@ from __future__ import print_function
 
 from setuptools import setup
 
-execfile('unflattener/__init__.py')
+from unflattener import __version__ as VERSION
 
 PIL_DEP = 'pil >= 1.1.7'
 PILLOW_DEP = 'pillow >= 2.2.1'
@@ -26,7 +26,7 @@ except:
 
 setup(
     name='Unflattener',
-    version=__version__,
+    version=VERSION,
     description='Make normal maps for 2D art.',
     url='http://github.com/dbohdan/unflattener',
     author='Danyil Bohdan',
