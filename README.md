@@ -1,6 +1,8 @@
 unflattener
 ===========
 
+[![Build Status](https://travis-ci.org/dbohdan/unflattener.svg?branch=master)](https://travis-ci.org/dbohdan/unflattener)
+
 Unflattener is a free and open source Python module and a command line tool (`unflatten.py`) that helps you make normal maps for 2D sprites and other graphics. You can use the normal maps it generates to implement dynamic lighting in video games.
 
 Example
