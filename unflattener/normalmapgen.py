@@ -257,7 +257,7 @@ def array_to_image(arr, alpha=None):
 
     # Produce an RGB(A) image from an array with three values per point.
     if arr.ndim == 3:
-        ni = range(3)
+        ni = list(range(3))
         for i in ni:
             ni[i] = make_image(arr[i])
         if alpha:
