@@ -14,8 +14,8 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="drawing.svg"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="illustration.svg"
    inkscape:export-filename="C:\Users\dbohdan\Dropbox\projects\programming\unflattener\drawing.png"
    inkscape:export-xdpi="236.33"
    inkscape:export-ydpi="236.33">
@@ -95,17 +95,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="166.92874"
-     inkscape:cy="768.73442"
+     inkscape:zoom="11.313708"
+     inkscape:cx="171.74915"
+     inkscape:cy="696.13618"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      showguides="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1003"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-width="1440"
+     inkscape:window-height="821"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -119,7 +119,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -199,7 +199,7 @@
        inkscape:export-filename="C:\Users\dbohdan\Dropbox\projects\programming\unflattener\text6206-3.png" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        x="20"
        y="332.36218"
        id="text3066"
@@ -216,7 +216,7 @@
          x="20"
          y="362.36218"
          style="font-size:24px"
-         id="tspan3245">normal maps</tspan></text>
+         id="tspan3245">normal map</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0;stroke:none;font-family:Sans"
@@ -305,8 +305,8 @@
          y="332.36218"
          style="font-size:14px;text-align:start;text-anchor:start"
          id="tspan3111"><tspan
-   id="tspan3113"
-   style="font-size:24px">Dynamic lighting </tspan></tspan><tspan
+           id="tspan3113"
+           style="font-size:24px">Dynamic lighting </tspan></tspan><tspan
          sodipodi:role="line"
          x="330"
          y="362.36218"
