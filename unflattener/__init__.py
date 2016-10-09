@@ -1,4 +1,4 @@
-__author__ = 'Danyil Bohdan'
-__copyright__ = 'Copyright (C) 2014 Danyil Bohdan'
+__author__ = 'dbohdan'
+__copyright__ = 'Copyright (c) 2013, 2014, 2015, 2016 dbohdan'
 __license__ = 'BSD'
 __version__ = '1.0'

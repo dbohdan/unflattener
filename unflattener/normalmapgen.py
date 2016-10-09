@@ -1,6 +1,6 @@
 # unflattener, a normal map generator for 2D art.
-# Copyright (C) 2013, 2014 Danyil Bohdan
-# All rights Reserved.
+# Copyright (c) 2013, 2014, 2015, 2016 dbohdan
+# All rights reserved.
 # See the file LICENSE for licensing information.
 """
 Implements the NormalMap class.
