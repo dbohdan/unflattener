@@ -127,4 +127,4 @@ License information
 
 Unflattener is distributed under the new (3-clause) BSD license. See the file `LICENSE`.
 
-Robot sprite originally from the [Bits & Bots art pack](http://opengameart.org/content/bits-bots-art-pack) by MoikMellah. The sprite and its derivatives are licensed under the Creative Commons CC-BY-SA 3.0 license.
+Robot sprite originally from the [Bits & Bots art pack](http://opengameart.org/content/bits-bots-art-pack) by MoikMellah. The sprite is licensed under the Creative Commons [CC0](http://creativecommons.org/publicdomain/zero/1.0/) license.
