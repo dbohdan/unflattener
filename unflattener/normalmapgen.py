@@ -1,5 +1,5 @@
 # unflattener, a normal map generator for 2D art.
-# Copyright (c) 2013, 2014, 2015, 2016 dbohdan
+# Copyright (c) 2013, 2014, 2015, 2016, 2017 dbohdan
 # All rights reserved.
 # See the file LICENSE for licensing information.
 """
