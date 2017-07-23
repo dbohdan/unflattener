@@ -38,7 +38,7 @@ Installation
 
 Unflattener has been tested to work under Linux (Ubuntu 12.04, Ubuntu 16.04, Fedora 26, Debian 7 and openSUSE Tumbleweed 2017*) and Windows (XP, 7, 8.1 and 10).
 
-You will need Python 2.7 (v2.6 and earlier won't work), NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener.
+You will need Python 2.7 (v2.6 and earlier won't work) or Python 3.2 or later, NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener. The following instructions are for Python 2.7.
 
 Debian and Ubuntu
 -----------------
