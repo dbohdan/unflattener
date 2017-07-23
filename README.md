@@ -36,7 +36,7 @@ The general idea is that in the d-lit images your object should look as if it we
 Installation
 ============
 
-Unflattener has been tested to work under Linux (Ubuntu 12.04, Ubuntu 16.04, Fedora 19, Debian 7 and openSUSE Tumbleweed 2017*) and Windows (XP, 7, 8.1 and 10).
+Unflattener has been tested to work under Linux (Ubuntu 12.04, Ubuntu 16.04, Fedora 26, Debian 7 and openSUSE Tumbleweed 2017*) and Windows (XP, 7, 8.1 and 10).
 
 You will need Python 2.7 (v2.6 and earlier won't work), NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener.
 
@@ -57,30 +57,27 @@ To install Unflattener, clone this repository, `cd` into it and run `setup.py`:
     cd unflattener
     sudo python setup.py install
 
-Fedora/CentOS
--------------
+Fedora
+------
 
 You can install the dependencies from the distribution's package repository with
 
-    su -
-    dnf install git numpy python-pillow python-setuptools
+    sudo dnf install git numpy python-pillow python-setuptools
 
 To install gimp-normalmap, run
 
-    su -
-    dnf install gimp-normalmap
+    sudo dnf install gimp-normalmap
 
 To install Unflattener, clone this repository, `cd` into it and run `setup.py`:
 
     git clone https://github.com/dbohdan/unflattener
     cd unflattener
-    su -
-    python setup.py install
+    sudo python setup.py install
 
 Windows
 -------
 
-On Windows you first need to install Python 2.7 using the official installer from <http://python.org/download/>. Unflattener has only been tested with the 32-bit versions of Python and its libraries (on both 32-bit and 64-bit Windows), so it is recommended that you use them.
+On Windows you first need to install Python 2.7 using the official installer from <http://python.org/download/>. Unflattener has only been tested with the 32-bit versions of Python, NumPy and Pillow (on both 32-bit and 64-bit Windows), so it is recommended that you use those.
 
 Once you have Python installed, download the latest binary packages for NumPy and Pillow from <http://www.lfd.uci.edu/~gohlke/pythonlibs/>. They will be named, e.g., `numpy-1.13.1+mkl-cp27-cp27m-win32.whl` and `Pillow-4.2.1-cp27-cp27m-win32.whl`. Open the Command Prompt in the directory where you downloaded the package files and run
 
@@ -91,7 +88,7 @@ To install Unflattener, clone this repository with [Git for Windows](https://git
 
     c:\Python27\python.exe setup.py install
 
-You should then be able to run Unflattener with the command `unflatten`. If you don't have the Python 2.7 scripts directory added to your `%PATH%`, try
+You should then be able to run Unflattener from the Command Prompt with the command `unflatten`. If you don't have the Python 2.7 scripts directory added to your `%PATH%`, try
 
     c:\Python27\Scripts\unflatten.exe
 
