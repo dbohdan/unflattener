@@ -3,7 +3,7 @@ unflattener
 
 [![Build Status](https://travis-ci.org/dbohdan/unflattener.svg?branch=master)](https://travis-ci.org/dbohdan/unflattener)
 
-Unflattener is a free and open source Python module and a command line tool (`unflatten.py`) that helps you make normal maps for 2D sprites and other graphics. You can use the normal maps it generates to implement dynamic lighting in video games.
+Unflattener is a free and open source Python module and a command line tool (`unflatten`) that helps you make normal maps for 2D sprites and other graphics. You can use the normal maps it generates to implement dynamic lighting in video games.
 
 
 Example
@@ -19,7 +19,7 @@ Example
 How it works
 ============
 
-Unflattener takes as input images of your object lit by a light source pointing directly at that object from four directions: top, bottom, left and right (we call those images "directionally lit" or "d-lit" — like "d-pad"). At least one such image is required; having at least two (one with light coming from the top or the bottom, one with light from the left or the right) is highly recommended.
+Unflattener takes as input images of your object lit by a light source pointing directly at that object from four directions: top, bottom, left and right (we'll call those images "directionally lit" or "d-lit" for short — like "d-pad"). At least one such image is required; having at least two (one with light coming from the top or the bottom, one with light from the left or the right) is highly recommended.
 
 Unflattener is written in Python and requires the libraries [NumPy](http://www.numpy.org/) and [PIL](http://www.pythonware.com/products/pil/) to work. Python programs can access its functionality directly by importing the `NormalMap` class from the module `unflattener.normalmapgen`. Right now Unflattener cannot do dynamic lighting previews, so you will need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that.
 
@@ -29,69 +29,71 @@ The core algorithm is explained in a [rather lengthy comment](https://github.com
 
 The general idea is that in the d-lit images your object should look as if it were
 
-1. uniformly matte white in color with no self-shadowing;
-2. lit by a very distant light source much larger than itself that creates no highlights.
+1. Uniformly matte white with no self-shadowing;
+2. Lit by a very distant light source much larger than itself that creates no highlights.
 
 
 Installation
 ============
 
-Unflattener has been tested to work under Linux (Ubuntu 12.04, Fedora 19 and Debian 7) and Windows (XP, 7 and 8.1).
+Unflattener has been tested to work under Linux (Ubuntu 12.04, Ubuntu 16.04, Fedora 19, Debian 7 and openSUSE Tumbleweed 2017*) and Windows (XP, 7, 8.1 and 10).
 
-You'll need Python 2.7 (v2.6 and earlier won't work due to the use of dict comprehensions), NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener.
-
-Once you've installed the dependencies (see below) clone this repository. You can run Unflattener on the test images without installing it with `run.sh` on Linux or `run-win.cmd` on Windows. To generate normal maps for other images you can either edit those files as needed, directly run `unflattener/unflatten.py` or use Setuptools to install the Unflattener package and get the command `unflatten`.
-
-Run the command `sudo python setup.py test` or run the test suite (`unflattener/tests/__init__.py`) directly to verify that everything works correctly.
+You will need Python 2.7 (v2.6 and earlier won't work), NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener.
 
 Debian and Ubuntu
 -----------------
 
-You can install the required packages from the command line with
+You can install the dependencies from the distribution's package repository with
 
-    sudo apt-get install python-numpy python-imaging python-setuptools
+    sudo apt install git python-numpy python-imaging python-setuptools
 
-To install gimp-normalmap do
+To install gimp-normalmap, run
 
-    sudo apt-get install gimp-normalmap
+    sudo apt install gimp-normalmap
 
-If you want the command `unflatten` on your system or you want to import Unflattener's normal map generator in your own Python projects install it as a package with
+To install Unflattener, clone this repository, `cd` into it and run `setup.py`:
 
+    git clone https://github.com/dbohdan/unflattener
+    cd unflattener
     sudo python setup.py install
 
-Fedora
-------
+Fedora/CentOS
+-------------
 
-You can install the required packages from the command line with
-
-    su -
-    dnf install numpy python-pillow python-setuptools
-
-To install gimp-normalmap do
+You can install the dependencies from the distribution's package repository with
 
     su -
-    yum install gimp-normalmap
+    dnf install git numpy python-pillow python-setuptools
 
-If you want the command `unflatten` in your system or you want to import Unflattener's normal map generator in your own Python projects install it as a package with
+To install gimp-normalmap, run
 
+    su -
+    dnf install gimp-normalmap
+
+To install Unflattener, clone this repository, `cd` into it and run `setup.py`:
+
+    git clone https://github.com/dbohdan/unflattener
+    cd unflattener
     su -
     python setup.py install
 
 Windows
 -------
 
-On Windows first install Python 2.7 using the official installer from <http://python.org/download/>. After that is done download and run the following package installers from <http://www.lfd.uci.edu/~gohlke/pythonlibs/>:
+On Windows you first need to install Python 2.7 using the official installer from <http://python.org/download/>. Unflattener has only been tested with the 32-bit versions of Python and its libraries (on both 32-bit and 64-bit Windows), so it is recommended that you use them.
 
-* `numpy-MKL-<version number>.win32-py2.7.exe`
-* `Pillow-<version number>.win32-py2.7.exe`
+Once you have Python installed, download the latest binary packages for NumPy and Pillow from <http://www.lfd.uci.edu/~gohlke/pythonlibs/>. They will be named, e.g., `numpy-1.13.1+mkl-cp27-cp27m-win32.whl` and `Pillow-4.2.1-cp27-cp27m-win32.whl`. Open the Command Prompt in the directory where you downloaded the package files and run
 
-Only 32-bit versions of Python and its libraries have been tested on Windows (both 32-bit and 64-bit versions), so it is recommended that you use them.
+    c:\Python27\python.exe -m pip install "numpy-1.13.1+mkl-cp27-cp27m-win32.whl"
+    c:\Python27\python.exe -m pip install Pillow-4.2.1-cp27-cp27m-win32.whl
 
-If you want to import Unflattener's normal map generator in your own Python projects install it as a package by running the command
+To install Unflattener, clone this repository with [Git for Windows](https://git-scm.com/download/) or download <https://github.com/dbohdan/unflattener/archive/master.zip> and unzip it, `cd` into the created directory and do
 
-    python setup.py install
+    c:\Python27\python.exe setup.py install
 
-on the Command Prompt as an administrator.
+You should then be able to run Unflattener with the command `unflatten`. If you don't have the Python 2.7 scripts directory added to your `%PATH%`, try
+
+    c:\Python27\Scripts\unflatten.exe
 
 
 Usage
