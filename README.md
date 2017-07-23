@@ -5,6 +5,7 @@ unflattener
 
 Unflattener is a free and open source Python module and a command line tool (`unflatten.py`) that helps you make normal maps for 2D sprites and other graphics. You can use the normal maps it generates to implement dynamic lighting in video games.
 
+
 Example
 =======
 
@@ -14,21 +15,23 @@ Example
 
 ![Dynamic lighting in gimp-normalmap in motion](readme-illustrations/animation1.gif)
 
+
 How it works
 ============
 
-Unflattener takes as input images of your object lit by a light source pointing directly at that object from four directions: top, bottom, left and right (we call those images "directionally lit" or "d-lit" — like "d-pad"). At least one such image is required, a least two (one with light from the top or the bottom, one with light from the left or the right) are highly recommended.
+Unflattener takes as input images of your object lit by a light source pointing directly at that object from four directions: top, bottom, left and right (we call those images "directionally lit" or "d-lit" — like "d-pad"). At least one such image is required; having at least two (one with light coming from the top or the bottom, one with light from the left or the right) is highly recommended.
 
-Unflattener is written in Python and requires the libraries [NumPy](http://www.numpy.org/) and [PIL](http://www.pythonware.com/products/pil/) to work. Python programs can access its functionality directly by importing the `NormalMap` class from the module `unflattener.normalmapgen`. Right now Unflattener cannot do dynamic lighting previews, so you'll need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that.
+Unflattener is written in Python and requires the libraries [NumPy](http://www.numpy.org/) and [PIL](http://www.pythonware.com/products/pil/) to work. Python programs can access its functionality directly by importing the `NormalMap` class from the module `unflattener.normalmapgen`. Right now Unflattener cannot do dynamic lighting previews, so you will need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that.
 
 This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
 
-The core algorithm is explained in a (rather lengthy) comment in the method `NormalMap.create_from_images` in `normalmapgen.py`. You'll find some tips on how the input artwork should look in the same comment.
+The core algorithm is explained in a [rather lengthy comment](https://github.com/dbohdan/unflattener/blob/master/unflattener/normalmapgen.py#L65) in the method `NormalMap.create_from_images` in `normalmapgen.py`. You will find some tips on how the input artwork should look in the same comment.
 
 The general idea is that in the d-lit images your object should look as if it were
 
 1. uniformly matte white in color with no self-shadowing;
 2. lit by a very distant light source much larger than itself that creates no highlights.
+
 
 Installation
 ============
@@ -41,7 +44,6 @@ Once you've installed the dependencies (see below) clone this repository. You ca
 
 Run the command `sudo python setup.py test` or run the test suite (`unflattener/tests/__init__.py`) directly to verify that everything works correctly.
 
-
 Debian and Ubuntu
 -----------------
 
@@ -51,7 +53,7 @@ You can install the required packages from the command line with
 
 To install gimp-normalmap do
 
-	sudo apt-get install gimp-normalmap
+    sudo apt-get install gimp-normalmap
 
 If you want the command `unflatten` on your system or you want to import Unflattener's normal map generator in your own Python projects install it as a package with
 
@@ -63,7 +65,7 @@ Fedora
 You can install the required packages from the command line with
 
     su -
-    yum install numpy python-pillow python-setuptools
+    dnf install numpy python-pillow python-setuptools
 
 To install gimp-normalmap do
 
@@ -91,6 +93,7 @@ If you want to import Unflattener's normal map generator in your own Python proj
 
 on the Command Prompt as an administrator.
 
+
 Usage
 =====
 
@@ -115,12 +118,12 @@ Usage
     One input file minimum, at least two (one for each axis) highly recommended.
     Input files should be 8-bit grayscale PNGs.
 
-Art requested
-=============
 
-Wanted: d-lit artwork. The developer of this project would love to see how Unflattener works for your artwork or game.
+Submit your work
+================
 
-[File an issue](https://github.com/dbohdan/unflattener/issues) to have a link to your work added here.
+If you use Unflattener to create artwork or video game graphics, [file an issue](https://github.com/dbohdan/unflattener/issues) to have your work featured here.
+
 
 License information
 ===================
