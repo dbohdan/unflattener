@@ -21,7 +21,7 @@ How it works
 
 Unflattener takes as input images of your object lit by a light source pointing directly at that object from four directions: top, bottom, left and right (we'll call those images "directionally lit" or "d-lit" for short — like "d-pad"). At least one such image is required; having at least two (one with light coming from the top or the bottom, one with light from the left or the right) is highly recommended.
 
-Unflattener is written in Python and requires the libraries [NumPy](http://www.numpy.org/) and [PIL](http://www.pythonware.com/products/pil/) to work. Python programs can access its functionality directly by importing the `NormalMap` class from the module `unflattener.normalmapgen`. Right now Unflattener cannot do dynamic lighting previews, so you will need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that.
+Unflattener is written in Python and requires the libraries [NumPy](http://www.numpy.org/) and [Pillow](https://python-pillow.org/) to work. Python programs can access its functionality directly by importing the `NormalMap` class from the module `unflattener.normalmapgen`. Right now Unflattener cannot do dynamic lighting previews, so you will need a third-party tool like the [gimp-normalmap](https://code.google.com/p/gimp-normalmap/) plugin for [GIMP](http://www.gimp.org/) for that.
 
 This project was inspired by [Sprite Lamp](http://snakehillgames.com/spritelamp/).
 
@@ -38,7 +38,7 @@ Installation
 
 Unflattener has been tested to work under Linux (Ubuntu 12.04, Ubuntu 16.04, Fedora 26, Debian 7 and openSUSE Tumbleweed 2017*) and Windows (XP, 7, 8.1 and 10).
 
-You will need Python 2.7 (v2.6 and earlier won't work) or Python 3.2 or later, NumPy and either PIL (the Python Imaging Library) or its replacement Pillow to run Unflattener. The following instructions are for Python 2.7.
+You will need Python 2.7 (v2.6 and earlier won't work) or Python 3.2 or later, NumPy and Pillow to run Unflattener. The following instructions are for Python 2.7.
 
 Debian and Ubuntu
 -----------------
