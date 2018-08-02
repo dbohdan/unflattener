@@ -55,7 +55,7 @@ To install Unflattener, clone this repository, `cd` into it and run `setup.py`:
 
     git clone https://github.com/dbohdan/unflattener
     cd unflattener
-    sudo python setup.py install
+    python setup.py install --user
 
 Fedora
 ------
